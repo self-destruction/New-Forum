@@ -1,13 +1,13 @@
 body {
-  padding-top: 4rem;
-  background-image: url("focused_kulinariya-vatrushka.jpg");
+  background-image: url("../focused_kulinariya-vatrushka.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: #ccba2c;
+  background-color: #cc7d38;
 }
 
 .site-header {
   background-color: rgba(33, 33, 33, 0.9);
+  position: sticky;
 }
 
 .heading {
@@ -17,9 +17,9 @@ body {
 }
 
 .my-content {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  /*border: 2px solid black;*/
+  margin: 25px auto 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-radius: 5px;
   background-color: rgba(251, 251, 251, 0.62);
 }

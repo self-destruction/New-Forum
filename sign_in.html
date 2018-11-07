@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Вход в учётную запись</title>
+
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="sign_in.css" rel="stylesheet">
+
+    <script src="js/main.js"></script>
+</head>
+
+<body class="text-center">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top site-header">
+    <a class="navbar-brand" href="index.html" role="button">Кулинарный форум</a>
+</nav>
+
+<div class="my-content container table-container content-box center">
+    <form id="signinAction" class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Вход в учётную запись</h1>
+        <label for="inputEmail" class="sr-only">Электронная почта</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Адрес электронной почты" required autofocus>
+        <label for="inputPassword" class="sr-only">Пароль</label>
+        <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Пароль" required>
+        <div class="checkbox mb-2">
+            <label>
+                <input type="checkbox" value="remember-me"> Запомнить меня
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
+        <p id="copyright_year" class="mt-5 mb-3 text-muted"></p>
+    </form>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById("copyright_year").innerHTML =
+        "&copy; " + new Date().getFullYear() + "-" + (new Date().getFullYear() + 1);
+
+    $("#signinAction").submit(function(event) {
+        document.location.href = 'index.html?is_auth=true';
+        event.preventDefault();
+    });
+</script>
+</body>
+</html>
