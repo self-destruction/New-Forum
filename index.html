@@ -1,77 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
 
-  <title>Кулинарный форум</title>
+    <title>Кулинарный форум</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="starter-template.css" rel="stylesheet">
+    <script src="js/main.js"></script>
 </head>
 
 <body>
-<!--site-header sticky-top py-1-->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top site-header">
-  <a class="navbar-brand" href="#">Кулинарный форум</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="index.html" role="button">Кулинарный форум</a>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <div class="navbar-nav mr-auto">
+    <div class="mr-auto">
     </div>
-    <a class="btn btn-outline-success my-2 my-sm-0" href="#" role="button">Регистрация</a>
-  </div>
+    <a id="btnSignin" class="btn btn-outline-success my-2 my-sm-0" href="sign_in.html" role="button">Войти</a>
 </nav>
 
-<div class="container main wrap col-md center">
-  <div class="my-content container table-container content-box center">
-    <h2 class="heading">Мои темы</h2>
-    <hr color="black" width="150">
-
-    <div class="table-responsive">
-      <table class="table table-hover"> <!-- table-sm table-striped -->
-      <thead>
-      <tr>
-        <!--<th scope="col">#</th>-->
-        <th scope="col">Название темы</th>
-        <th scope="col" class="text-center">Ответы</th>
-        <th scope="col" class="text-center">Просмотры</th>
-        <th scope="col" class="text-center">Последнее сообщение</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <!--<th scope="row">1</th>-->
-        <td>Как украсить стол на Пасху</td>
-        <td class="text-center">23</td>
-        <td class="text-center">453</td>
-        <td class="text-center">
-          <div class="gray"><small>Пн, 27 фев 2017 23:12</small></div>
-          от <a href="">Emerald</a>
-        </td>
-      </tr>
-      <tr>
-        <!--<th scope="row">2</th>-->
-        <td>Бекон с мороженкой VS Пицца с ананасами</td>
-        <td class="text-center">0</td>
-        <td class="text-center">12</td>
-        <td class="text-center">
-          <div class="gray"><small>Чт, 27 фев 2014 01:20</small></div>
-          от <a href="">mia</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
+<div class="container main wrap col-md center" id="sections">
 
   <div class="my-content container table-container content-box center">
     <h2 class="heading">Все темы</h2>
@@ -138,10 +91,11 @@
       </table>
     </div>
   </div>
+
 </div>
 
 <footer class="my-footer card-footer">
-  <div class="row">
+    <div class="row">
     <div class="col-5">
       <div class="element">
         <h4>Кто на сайте</h4>
@@ -157,19 +111,80 @@
       <i class="glyphicon glyphicon-envelope"></i> <a href="mailto:kuharka%40mail.ru">kuharka@mail.ru</a>
       <i class="glyphicon glyphicon-earphone"></i> +7 (925) 509-49-35
     </div>
-  </div>
-  <!--&lt;!&ndash; Copyright &ndash;&gt;-->
-  <!--<div class="footer-copyright text-center py-3">© 2018 Copyright:-->
-    <!--<a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>-->
-  <!--</div>-->
+    </div>
 </footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="assets/js/vendor/popper.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+    let getUrlParameter = function getUrlParameter(sParam) {
+        let sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+        return 'false';
+    };
+
+    $(document).ready(function () {
+        let isAuth = getUrlParameter('is_auth');
+        if(isAuth === 'true') {
+            $("#btnSignin").replaceWith(
+                "<a id=\"btnSignout\" class=\"btn btn-outline-danger my-2 my-sm-0\" href=\"index.html\" role=\"button\" onclick=\"function a() { document.location.href = 'index.html' }\">Выйти</a>"
+            );
+
+            $("#sections").prepend(
+                "<div class=\"my-content container table-container content-box center\">\n" +
+                "    <h2 class=\"heading\">Мои темы</h2>\n" +
+                "    <hr color=\"black\" width=\"150\">\n" +
+                "\n" +
+                "    <div class=\"table-responsive\">\n" +
+                "      <table class=\"table table-hover\"> <!-- table-sm table-striped -->\n" +
+                "      <thead>\n" +
+                "      <tr>\n" +
+                "        <!--<th scope=\"col\">#</th>-->\n" +
+                "        <th scope=\"col\">Название темы</th>\n" +
+                "        <th scope=\"col\" class=\"text-center\">Ответы</th>\n" +
+                "        <th scope=\"col\" class=\"text-center\">Просмотры</th>\n" +
+                "        <th scope=\"col\" class=\"text-center\">Последнее сообщение</th>\n" +
+                "      </tr>\n" +
+                "      </thead>\n" +
+                "      <tbody>\n" +
+                "      <tr>\n" +
+                "        <!--<th scope=\"row\">1</th>-->\n" +
+                "        <td>Как украсить стол на Пасху</td>\n" +
+                "        <td class=\"text-center\">23</td>\n" +
+                "        <td class=\"text-center\">453</td>\n" +
+                "        <td class=\"text-center\">\n" +
+                "          <div class=\"gray\"><small>Пн, 27 фев 2017 23:12</small></div>\n" +
+                "          от <a href=\"\">Emerald</a>\n" +
+                "        </td>\n" +
+                "      </tr>\n" +
+                "      <tr>\n" +
+                "        <!--<th scope=\"row\">2</th>-->\n" +
+                "        <td>Бекон с мороженкой VS Пицца с ананасами</td>\n" +
+                "        <td class=\"text-center\">0</td>\n" +
+                "        <td class=\"text-center\">12</td>\n" +
+                "        <td class=\"text-center\">\n" +
+                "          <div class=\"gray\"><small>Чт, 27 фев 2014 01:20</small></div>\n" +
+                "          от <a href=\"\">mia</a>\n" +
+                "        </td>\n" +
+                "      </tr>\n" +
+                "      </tbody>\n" +
+                "    </table>\n" +
+                "    </div>\n" +
+                "  </div>"
+            );
+        }
+    });
+</script>
 </body>
 </html>
