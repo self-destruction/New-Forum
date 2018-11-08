@@ -1,9 +1,14 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
 body {
   background-image: url("../focused_kulinariya-vatrushka.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-color: #cc7d38;
+  margin-bottom: 118px; /* Margin bottom by footer height */
 }
 
 .site-header {
@@ -26,8 +31,6 @@ body {
 }
 
 .my-footer {
-  background-color: rgba(33, 33, 33, 0.9);
-  color: rgba(250, 250, 250, 0.9);
   position: absolute;
   bottom: 0;
   width: 100%;
