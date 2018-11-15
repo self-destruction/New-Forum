@@ -117,74 +117,74 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
-<script>
-    let getUrlParameter = function getUrlParameter(sParam) {
-        let sPageURL = decodeURIComponent(window.location.search.substring(1)),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
+<!--<script>-->
+    <!--let getUrlParameter = function getUrlParameter(sParam) {-->
+        <!--let sPageURL = decodeURIComponent(window.location.search.substring(1)),-->
+            <!--sURLVariables = sPageURL.split('&'),-->
+            <!--sParameterName,-->
+            <!--i;-->
 
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
+        <!--for (i = 0; i < sURLVariables.length; i++) {-->
+            <!--sParameterName = sURLVariables[i].split('=');-->
 
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : sParameterName[1];
-            }
-        }
-        return 'false';
-    };
+            <!--if (sParameterName[0] === sParam) {-->
+                <!--return sParameterName[1] === undefined ? true : sParameterName[1];-->
+            <!--}-->
+        <!--}-->
+        <!--return 'false';-->
+    <!--};-->
 
-    $(document).ready(function () {
-        let isAuth = getUrlParameter('is_auth');
-        if(isAuth === 'true') {
-            $("#btnSignin").replaceWith(
-                "<a id=\"btnSignout\" class=\"btn btn-outline-danger my-2 my-sm-0\" href=\"index.html\" role=\"button\" onclick=\"function a() { document.location.href = 'index.html' }\">Выйти</a>"
-            );
+    <!--$(document).ready(function () {-->
+        <!--let isAuth = getUrlParameter('is_auth');-->
+        <!--if(isAuth === 'true') {-->
+            <!--$("#btnSignin").replaceWith(-->
+                <!--"<a id=\"btnSignout\" class=\"btn btn-outline-danger my-2 my-sm-0\" href=\"index.html\" role=\"button\" onclick=\"function a() { document.location.href = 'index.html' }\">Выйти</a>"-->
+            <!--);-->
 
-            $("#sections").prepend(
-                "<div class=\"my-content container table-container content-box center\">\n" +
-                "    <h2 class=\"heading\">Мои темы</h2>\n" +
-                "    <hr color=\"black\" width=\"150\">\n" +
-                "\n" +
-                "    <div class=\"table-responsive\">\n" +
-                "      <table class=\"table table-hover\"> <!-- table-sm table-striped -->\n" +
-                "      <thead>\n" +
-                "      <tr>\n" +
-                "        <!--<th scope=\"col\">#</th>-->\n" +
-                "        <th scope=\"col\">Название темы</th>\n" +
-                "        <th scope=\"col\" class=\"text-center\">Ответы</th>\n" +
-                "        <th scope=\"col\" class=\"text-center\">Просмотры</th>\n" +
-                "        <th scope=\"col\" class=\"text-center\">Последнее сообщение</th>\n" +
-                "      </tr>\n" +
-                "      </thead>\n" +
-                "      <tbody>\n" +
-                "      <tr>\n" +
-                "        <!--<th scope=\"row\">1</th>-->\n" +
-                "        <td>Как украсить стол на Пасху</td>\n" +
-                "        <td class=\"text-center\">23</td>\n" +
-                "        <td class=\"text-center\">453</td>\n" +
-                "        <td class=\"text-center\">\n" +
-                "          <div class=\"gray\"><small>Пн, 27 фев 2017 23:12</small></div>\n" +
-                "          от <a href=\"\">Emerald</a>\n" +
-                "        </td>\n" +
-                "      </tr>\n" +
-                "      <tr>\n" +
-                "        <!--<th scope=\"row\">2</th>-->\n" +
-                "        <td>Бекон с мороженкой VS Пицца с ананасами</td>\n" +
-                "        <td class=\"text-center\">0</td>\n" +
-                "        <td class=\"text-center\">12</td>\n" +
-                "        <td class=\"text-center\">\n" +
-                "          <div class=\"gray\"><small>Чт, 27 фев 2014 01:20</small></div>\n" +
-                "          от <a href=\"\">mia</a>\n" +
-                "        </td>\n" +
-                "      </tr>\n" +
-                "      </tbody>\n" +
-                "    </table>\n" +
-                "    </div>\n" +
-                "  </div>"
-            );
-        }
-    });
-</script>
+            <!--$("#sections").prepend(-->
+                <!--"<div class=\"my-content container table-container content-box center\">\n" +-->
+                <!--"    <h2 class=\"heading\">Мои темы</h2>\n" +-->
+                <!--"    <hr color=\"black\" width=\"150\">\n" +-->
+                <!--"\n" +-->
+                <!--"    <div class=\"table-responsive\">\n" +-->
+                <!--"      <table class=\"table table-hover\"> &lt;!&ndash; table-sm table-striped &ndash;&gt;\n" +-->
+                <!--"      <thead>\n" +-->
+                <!--"      <tr>\n" +-->
+                <!--"        &lt;!&ndash;<th scope=\"col\">#</th>&ndash;&gt;\n" +-->
+                <!--"        <th scope=\"col\">Название темы</th>\n" +-->
+                <!--"        <th scope=\"col\" class=\"text-center\">Ответы</th>\n" +-->
+                <!--"        <th scope=\"col\" class=\"text-center\">Просмотры</th>\n" +-->
+                <!--"        <th scope=\"col\" class=\"text-center\">Последнее сообщение</th>\n" +-->
+                <!--"      </tr>\n" +-->
+                <!--"      </thead>\n" +-->
+                <!--"      <tbody>\n" +-->
+                <!--"      <tr>\n" +-->
+                <!--"        &lt;!&ndash;<th scope=\"row\">1</th>&ndash;&gt;\n" +-->
+                <!--"        <td>Как украсить стол на Пасху</td>\n" +-->
+                <!--"        <td class=\"text-center\">23</td>\n" +-->
+                <!--"        <td class=\"text-center\">453</td>\n" +-->
+                <!--"        <td class=\"text-center\">\n" +-->
+                <!--"          <div class=\"gray\"><small>Пн, 27 фев 2017 23:12</small></div>\n" +-->
+                <!--"          от <a href=\"\">Emerald</a>\n" +-->
+                <!--"        </td>\n" +-->
+                <!--"      </tr>\n" +-->
+                <!--"      <tr>\n" +-->
+                <!--"        &lt;!&ndash;<th scope=\"row\">2</th>&ndash;&gt;\n" +-->
+                <!--"        <td>Бекон с мороженкой VS Пицца с ананасами</td>\n" +-->
+                <!--"        <td class=\"text-center\">0</td>\n" +-->
+                <!--"        <td class=\"text-center\">12</td>\n" +-->
+                <!--"        <td class=\"text-center\">\n" +-->
+                <!--"          <div class=\"gray\"><small>Чт, 27 фев 2014 01:20</small></div>\n" +-->
+                <!--"          от <a href=\"\">mia</a>\n" +-->
+                <!--"        </td>\n" +-->
+                <!--"      </tr>\n" +-->
+                <!--"      </tbody>\n" +-->
+                <!--"    </table>\n" +-->
+                <!--"    </div>\n" +-->
+                <!--"  </div>"-->
+            <!--);-->
+        <!--}-->
+    <!--});-->
+<!--</script>-->
 </body>
 </html>

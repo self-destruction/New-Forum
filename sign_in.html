@@ -10,7 +10,7 @@
     <title>Вход в учётную запись</title>
 
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="sign_in.css" rel="stylesheet">
+    <link href="css/sign_in.css" rel="stylesheet">
 
     <script src="js/main.js"></script>
 </head>
@@ -22,17 +22,21 @@
 
 <div class="my-content container table-container content-box center">
     <form id="signinAction" class="form-signin">
-        <h1 class="h3 mb-3 font-weight-normal">Вход в учётную запись</h1>
+        <h1 class="h3 mb-3 py-3 font-weight-normal">Вход в учётную запись</h1>
         <label for="inputEmail" class="sr-only">Электронная почта</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Адрес электронной почты" required autofocus>
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Пароль" required>
-        <div class="checkbox mb-2">
-            <label>
-                <input type="checkbox" value="remember-me"> Запомнить меня
-            </label>
-        </div>
+        <!--<div class="checkbox mb-2">-->
+            <!--<label>-->
+                <!--<input type="checkbox" value="remember-me"> Запомнить меня-->
+            <!--</label>-->
+        <!--</div>-->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
+        <div class="py-1">
+            <label>Впервые здесь?</label>
+            <a href="register.html">Зарегистрируйся</a>
+        </div>
         <p id="copyright_year" class="mt-5 mb-3 text-muted"></p>
     </form>
 </div>
@@ -42,11 +46,6 @@
 <script>
     document.getElementById("copyright_year").innerHTML =
         "&copy; " + new Date().getFullYear() + "-" + (new Date().getFullYear() + 1);
-
-    $("#signinAction").submit(function(event) {
-        document.location.href = 'index.html?is_auth=true';
-        event.preventDefault();
-    });
 </script>
 </body>
 </html>
