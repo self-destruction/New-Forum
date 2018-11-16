@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+if (empty($_SESSION['count'])) {
+    $_SESSION['count'] = 1;
+} else {
+    $_SESSION['count']++;
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,11 +27,27 @@
 
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top site-header">
-    <a class="navbar-brand" href="index.html" role="button">Кулинарный форум</a>
+    <a class="navbar-brand" href="index.php" role="button">Кулинарный форум</a>
 
     <div class="mr-auto">
     </div>
-    <a id="btnSignin" class="btn btn-outline-success my-2 my-sm-0" href="sign_in.html" role="button">Войти</a>
+<!--    <h4>--><?php //echo $_SESSION['count'];?><!--</h4>-->
+    <?php
+    echo "<script>console.log( '" . $_SESSION["email"] . "' );</script>";
+//    session_start();
+    if (!isset($_SESSION["email"])) {
+        ?>
+        <a id="btnSignin" class="btn btn-outline-success my-2 my-sm-0" href="sign_in/sign_in.html" role="button">Войти</a>
+        <?php
+//    } else {
+//        ?>
+<!--        <h4>--><?php //echo $_SESSION["email"];?><!--</h4>-->
+<!--<!--        <form method="post" action="session_destroy.php">-->-->
+<!--<!--            <a id="btnSignout" class="btn btn-outline-danger my-2 my-sm-0" href="index.php" role="button">Выйти</a>-->-->
+<!--<!--        </form>-->-->
+<!--        --><?php
+    }
+    ?>
 </nav>
 
 <div class="container main wrap col-md center" id="sections">
@@ -138,7 +164,7 @@
         <!--let isAuth = getUrlParameter('is_auth');-->
         <!--if(isAuth === 'true') {-->
             <!--$("#btnSignin").replaceWith(-->
-                <!--"<a id=\"btnSignout\" class=\"btn btn-outline-danger my-2 my-sm-0\" href=\"index.html\" role=\"button\" onclick=\"function a() { document.location.href = 'index.html' }\">Выйти</a>"-->
+                <!--"<a id=\"btnSignout\" class=\"btn btn-outline-danger my-2 my-sm-0\" href=\"index.php\" role=\"button\" onclick=\"function a() { document.location.href = 'index.php' }\">Выйти</a>"-->
             <!--);-->
 
             <!--$("#sections").prepend(-->
