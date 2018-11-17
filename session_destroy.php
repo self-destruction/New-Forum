@@ -1,3 +1,7 @@
 <?php
 
-//unset($_SESSION["username"]);
+session_start();
+
+unset($_SESSION['email']);
+
+header("Location: {$_SERVER["HTTP_ORIGIN"]}");

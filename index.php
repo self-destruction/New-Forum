@@ -1,12 +1,5 @@
 <?php
-
 session_start();
-
-if (empty($_SESSION['count'])) {
-    $_SESSION['count'] = 1;
-} else {
-    $_SESSION['count']++;
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,21 +24,17 @@ if (empty($_SESSION['count'])) {
 
     <div class="mr-auto">
     </div>
-<!--    <h4>--><?php //echo $_SESSION['count'];?><!--</h4>-->
     <?php
-    echo "<script>console.log( '" . $_SESSION["email"] . "' );</script>";
-//    session_start();
-    if (!isset($_SESSION["email"])) {
+    if (!isset($_SESSION['email'])) {
         ?>
         <a id="btnSignin" class="btn btn-outline-success my-2 my-sm-0" href="sign_in/sign_in.html" role="button">Войти</a>
         <?php
-//    } else {
-//        ?>
-<!--        <h4>--><?php //echo $_SESSION["email"];?><!--</h4>-->
-<!--<!--        <form method="post" action="session_destroy.php">-->-->
-<!--<!--            <a id="btnSignout" class="btn btn-outline-danger my-2 my-sm-0" href="index.php" role="button">Выйти</a>-->-->
-<!--<!--        </form>-->-->
-<!--        --><?php
+    } else {
+        ?>
+        <form method="post" action="session_destroy.php">
+            <button class="btn btn-outline-danger my-2 my-sm-0 btn-danger btn-block" type="submit">Выйти</button>
+        </form>
+        <?php
     }
     ?>
 </nav>
