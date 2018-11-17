@@ -1,20 +1,22 @@
 -- creating db
+DROP USER `admin`@`localhost`;
+DROP USER `forum_user`@`localhost`;
+
 CREATE DATABASE IF NOT EXISTS `forum`;
 USE `forum`;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(256) NOT NULL,
-  `login` VARCHAR(60) NOT NULL,
+  `login` VARCHAR(60) UNIQUE NOT NULL,
+  `email` VARCHAR(256) UNIQUE NOT NULL,
   `hash` CHAR(64) NOT NULL,
   `role` ENUM('admin', 'user') NOT NULL DEFAULT 'user',
   `isBlocked` BOOLEAN NOT NULL DEFAULT FALSE,
   `description` TEXT DEFAULT NULL,
   `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `lastLogin` DATETIME,
-  PRIMARY KEY (`id`, `login`)
+  PRIMARY KEY (`id`, `email`, `login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE UNIQUE INDEX `idx_user_login`
@@ -55,3 +57,13 @@ CREATE TABLE IF NOT EXISTS `picture` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`messageId`) REFERENCES `forum`.`message`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE USER `admin`@`localhost` IDENTIFIED BY 'admin';
+GRANT SELECT,INSERT,UPDATE,DELETE ON `forum`.* to `admin`@`localhost`;
+
+CREATE USER `forum_user`@`localhost` IDENTIFIED BY 'forum_user';
+GRANT SELECT, INSERT ON `forum`.* to `forum_user`@`localhost`;
+GRANT UPDATE ON `forum`.`user` to `forum_user`@`localhost`;
+
+# SELECT User,Host FROM mysql.user;
+# SHOW GRANTS FOR `forum_user`@`localhost`;
