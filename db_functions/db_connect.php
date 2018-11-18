@@ -25,30 +25,25 @@ class dbConnect {
     }
 
     /**
-     * @param $email
      * @param $login
+     * @param $email
      * @param $password
-     * @return bool
+     * @throws Exception
      */
-    public function insertUser($email, $login, $password) {
+    public function insertUser($login, $email, $password) {
         try {
             $hash = $this->getHash($password);
             $result = $this->pdo->prepare(
-                "INSERT INTO `forum`.`user` (email, login, hash)
-                  VALUES (:email, :login, :hash)"
+                "INSERT INTO `forum`.`user` (login, email, hash)
+              VALUES (:login, :email, :hash)"
             );
-            $result->bindParam(":email", $email, PDO::PARAM_STR);
             $result->bindParam(":login", $login, PDO::PARAM_STR);
+            $result->bindParam(":email", $email, PDO::PARAM_STR);
             $result->bindParam(":hash", $hash, PDO::PARAM_STR);
-            $isSuccess = $result->execute();
-
-            if (!$isSuccess) {
-                echo 'Не удалось выполнить добавление такого пользователя.';
-            }
-        } catch (Exception $exception) {
-            echo "Не удалось выполнить запрос на добавление пользователя\n{$exception->getMessage()}";
+            $result->execute();
+        } catch (PDOException $exception) {
+            throw new Exception('Не удалось выполнить добавление такого пользователя', 2);
         }
-        return false;
     }
 
     /**

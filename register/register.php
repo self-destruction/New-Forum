@@ -8,17 +8,16 @@ $login = $_POST["login"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-
-$db = new dbConnect();
-$success = $db->insertUser($email, $login, $password);
-
-if ($success) {
-    $_SESSION['email'] = $email;
-    header("Location: {$_SERVER["HTTP_ORIGIN"]}");
-} else {
-    $loc = $_SERVER["HTTP_ORIGIN"] . '/register/register.html';
-//    echo "<script>console.log('Не удалось зарегистрировать!');</script>";
-    header("Location: {$loc}");
+try {
+    $db = new dbConnect();
+    $db->insertUser($email, $login, $password);
+} catch (PDOException $exception) {
+    echo json_encode(['isSuccess' => false, 'errorCode' => 1]);
+    return;
+} catch (Exception $exception) {
+    echo json_encode(['isSuccess' => false, 'errorCode' => $exception->getCode()]);
+    return;
 }
 
-//header("Location: {$_SERVER["HTTP_ORIGIN"]}");
+$_SESSION['email'] = $email;
+echo json_encode(['isSuccess' => true, 'errorCode' => null]);

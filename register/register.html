@@ -10,7 +10,7 @@
     <title>Вход в учётную запись</title>
 
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/sign_in.css" rel="stylesheet">
+    <link href="../css/registration.css" rel="stylesheet">
 
     <script src="../js/main.js"></script>
 </head>
@@ -21,8 +21,8 @@
 </nav>
 
 <div class="my-content container table-container content-box center">
-    <form id="registrationAction" class="form-signin" method="post" action="register.php">
-        <h1 class="h3 mb-3 py-3 font-weight-normal">Регистрация</h1>
+    <div id="registrationAction" class="form-signin">
+        <h1 class="h3 mb-3 py-3 font-weight-normal" id="registrationText">Регистрация</h1>
         <div class="form-group text-left">
             <label for="login">Логин</label>
             <div class="input-group">
@@ -51,20 +51,12 @@
                 <input type="password" class="form-control" name="confirm" id="confirm" onkeyup="validatePassword()" placeholder="Подтвердите пароль"/>
             </div>
         </div>
-        <button class="mt-5 mb-3 btn btn-lg btn-success btn-block" type="submit">Зарегистрировать</button>
-    </form>
+        <button class="mt-5 mb-3 btn btn-lg btn-success btn-block" id="submit" type="submit">Зарегистрировать</button>
+    </div>
 </div>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../dist/js/bootstrap.min.js"></script>
-<script>
-    function validatePassword(){
-        if(document.getElementById("password").value != document.getElementById("confirm").value) {
-            document.getElementById("confirm").setCustomValidity("Пароли не совпадает");
-        } else {
-            document.getElementById("confirm").setCustomValidity('');
-        }
-    }
-</script>
+<script type="text/javascript" src="register.js"></script>
 </body>
 </html>

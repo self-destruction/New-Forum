@@ -3,15 +3,16 @@ function signinError(errorMessage) {
     if ($("#errorAlert")[0]) {
         $("#errorAlert").replaceWith( errorDiv );
     } else {
-        $('#signinText').after(errorDiv);
+        $('#registrationText').after(errorDiv);
     }
 }
 
 $("#submit")[0].onclick = function() {
     $.ajax({
         type: 'POST',
-        url: 'sign_in.php',
+        url: 'register.php',
         data: {
+            'login': document.getElementById("login").value,
             'email': document.getElementById("email").value,
             'password': document.getElementById("password").value
         },
@@ -22,7 +23,7 @@ $("#submit")[0].onclick = function() {
             if(!responseJSON.isSuccess) {
                 switch (responseJSON.errorCode) {
                     case 1: errorText = 'Невозможно установить соединение с базой данных'; break;
-                    case 2: errorText = 'Email или пароль введён неверно.'; break;
+                    case 2: errorText = 'Такой email или логин уже занят'; break;
                     default: errorText = 'Ошибка.'; break;
                 }
                 signinError(errorText)
@@ -33,5 +34,10 @@ $("#submit")[0].onclick = function() {
     });
 };
 
-document.getElementById("copyright_year").innerHTML =
-    "&copy; " + new Date().getFullYear() + "-" + (new Date().getFullYear() + 1);
+function validatePassword(){
+    if(document.getElementById("password").value != document.getElementById("confirm").value) {
+        document.getElementById("confirm").setCustomValidity("Пароли не совпадает");
+    } else {
+        document.getElementById("confirm").setCustomValidity('');
+    }
+}
