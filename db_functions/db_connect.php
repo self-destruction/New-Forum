@@ -16,17 +16,12 @@ class dbConnect {
      */
     public function __construct()
     {
-//        try {
-            $connection_string = "mysql:host=127.0.0.1;port=3307;dbname=forum";
-            $this->pdo = new PDO(
-                $connection_string,
-                'forum_user',
-                'forum_user',
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-            );
-//        } catch (PDOException $e) {
-//            echo "Невозможно установить соединение с базой данных\n{$e->getMessage()}";
-//        }
+        $this->pdo = new PDO(
+            'mysql:host=127.0.0.1;port=3307;dbname=forum',
+            'forum_user',
+            'forum_user',
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
     }
 
     /**
