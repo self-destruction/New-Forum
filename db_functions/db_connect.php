@@ -61,7 +61,7 @@ class dbConnect {
     /**
      * @param $email
      * @param $password
-     * @return bool
+     * @throws Exception
      */
     function selectUser($email, $password) {
         $hash = $this->getHash($password);
@@ -75,9 +75,7 @@ class dbConnect {
         $user = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($user) || !isset($user[0]['id'])) {
-            return false;
-        } else {
-            return true;
+            throw new Exception('Пользователь не найден', 1);
         }
     }
 
