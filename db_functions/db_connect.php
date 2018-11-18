@@ -16,7 +16,7 @@ class dbConnect {
      */
     public function __construct()
     {
-        try {
+//        try {
             $connection_string = "mysql:host=127.0.0.1;port=3307;dbname=forum";
             $this->pdo = new PDO(
                 $connection_string,
@@ -24,9 +24,9 @@ class dbConnect {
                 'forum_user',
                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
             );
-        } catch (PDOException $e) {
-            echo "Невозможно установить соединение с базой данных\n{$e->getMessage()}";
-        }
+//        } catch (PDOException $e) {
+//            echo "Невозможно установить соединение с базой данных\n{$e->getMessage()}";
+//        }
     }
 
     /**
@@ -49,8 +49,6 @@ class dbConnect {
 
             if (!$isSuccess) {
                 echo 'Не удалось выполнить добавление такого пользователя.';
-            } else {
-                return true;
             }
         } catch (Exception $exception) {
             echo "Не удалось выполнить запрос на добавление пользователя\n{$exception->getMessage()}";
@@ -61,7 +59,7 @@ class dbConnect {
     /**
      * @param $email
      * @param $password
-     * @return bool
+     * @throws Exception
      */
     function selectUser($email, $password) {
         $hash = $this->getHash($password);
@@ -75,9 +73,7 @@ class dbConnect {
         $user = $result->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($user) || !isset($user[0]['id'])) {
-            return false;
-        } else {
-            return true;
+            throw new Exception('Пользователь не найден', 2);
         }
     }
 
