@@ -3,7 +3,7 @@ html {
   min-height: 100%;
 }
 body {
-  background-image: url("../focused_kulinariya-vatrushka.jpg");
+  background-image: url("../static/focused_kulinariya-vatrushka.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

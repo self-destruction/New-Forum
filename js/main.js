@@ -1,17 +1,24 @@
-// $("#submit")[0].onclick =
-//     function() {
-//     // console.log(document.getElementById("email").value);
-//     // console.log(document.getElementById("password").value);
-//     $.ajax({
-//         type: 'POST',
-//         url: 'sign_in.php',
-//         data: {
-//             'email': document.getElementById("email").value,
-//             'password': document.getElementById("password").value
-//         },
-//         success: function (response) {
-//             let json = JSON.parse(response);
-//             console.log(json);
-//         }
-//     });
-// };
+$("#personPage")[0].onclick =
+    function() {
+    $.ajax({
+        type: 'POST',
+        url: '../person/person_.php',
+        data: { },
+        success: function (response) {
+            let responseJSON = JSON.parse(response);
+
+            if(responseJSON.isSuccess) {
+                (function () {
+                    console.log(responseJSON.data.login);
+                    // $.ajax({
+                    //     type: 'POST',
+                    //     url: ''
+                    // });
+                }());
+                // window.location.href = '/';
+            } else {
+                window.location.href = '/';
+            }
+        }
+    });
+};
