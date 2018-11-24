@@ -10,7 +10,7 @@ function signinError(errorMessage) {
 $("#submit")[0].onclick = function() {
     $.ajax({
         type: 'POST',
-        url: 'register.php',
+        url: 'register_post',
         data: {
             'login': document.getElementById("login").value,
             'email': document.getElementById("email").value,

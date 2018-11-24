@@ -10,15 +10,13 @@
     <title>Вход в учётную запись</title>
 
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="sign_in.css" rel="stylesheet">
+    <link href="../sign_inPage/sign_in.css" rel="stylesheet">
 
     <script src="../js/main.js"></script>
 </head>
 
 <body class="text-center">
-<nav class="navbar navbar-expand-md navbar-dark fixed-top site-header">
-    <a class="navbar-brand" href="../index.php" role="button">Кулинарный форум</a>
-</nav>
+<?php require 'partials/sign_register/nav.php'?>
 
 <div class="my-content container table-container content-box center">
     <div id="signinAction" class="form-signin">
@@ -30,7 +28,7 @@
         <button class="btn btn-lg btn-primary btn-block" id="submit" type="submit">Вход</button>
         <div class="py-1">
             <label>Впервые здесь?</label>
-            <a href="../register/register.html">Зарегистрируйся</a>
+            <a href="/registration">Зарегистрируйся</a>
         </div>
         <p id="copyright_year" class="mt-5 mb-3 text-muted"></p>
     </div>
@@ -38,6 +36,6 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="sign_in.js"></script>
+<script type="text/javascript" src="../sign_inPage/sign_in.js"></script>
 </body>
 </html>

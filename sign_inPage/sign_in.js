@@ -10,12 +10,13 @@ function signinError(errorMessage) {
 $("#submit")[0].onclick = function() {
     $.ajax({
         type: 'POST',
-        url: 'sign_in.php',
+        url: 'sign_in_post',
         data: {
             'email': document.getElementById("email").value,
             'password': document.getElementById("password").value
         },
         success: function (response) {
+            console.log(response);
             let responseJSON = JSON.parse(response);
 
             let errorText = '';
