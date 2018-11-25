@@ -24,7 +24,12 @@ session_start();
 <div class="container main wrap col-md center" id="sections">
 
     <div class="my-content container table-container content-box center">
-        <h2 class="heading">Все темы</h2>
+        <div class="row">
+            <div class="col" style="position: fixed; z-index: 1;">
+                <button id="brnCreateTheme" type="button" class="btn btn-lg btn-primary" href="">+ Создать тему</button>
+            </div>
+            <div class="col"><h2 class="heading">Все темы</h2></div>
+        </div>
         <hr color="black" width="150">
 
         <div class="table-responsive">
