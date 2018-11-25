@@ -19,5 +19,5 @@ try {
     return;
 }
 
-$_SESSION['email'] = $email;
+$_SESSION['login'] = $login;
 echo json_encode(['isSuccess' => true, 'errorCode' => null]);

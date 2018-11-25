@@ -1,5 +1,9 @@
 <?php
+require 'core/get_person_info.php';
 session_start();
+if (!$person) {
+    header("Location: /");
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,28 +17,36 @@ session_start();
     <title>Кулинарный форум</title>
 
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/index.css" rel="stylesheet">
     <link href="../css/person.css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet">
 
     <script src="../js/main.js"></script>
 </head>
 
 <body>
-<?php require 'partials/nav.php'?>
-
+<?php require 'partials/nav.php';?>
 <div class="container main wrap col-md center" id="sections">
 
     <div class="my-content container table-container content-box center">
         <h2 class="heading">Страница пользователя</h2>
         <hr color="black" width="150">
+        <hr class="my-4">
 
-        <div class="table-responsive">
-            <h2 class="blog-post-title"><a href="#">Ahdrey344</a></h2>
-            <p class="blog-post-meta">Andree1979@gmail.com</p>
-            <p class="blog-post-meta">January 1, 2014</p>
+        <div class="container table-responsive">
+            <div class="my-div p-2 pl-3 text-left">
+                <label for="login">Логин:</label>
+                <div><h5 class="blog-post-title"><?php echo $person['login']?></h5></div>
+            </div>
+            <div class="my-div p-2 pl-3 text-left">
+                <label for="login">E-mail:</label>
+                <div><h5 class="blog-post-title"><?php echo $person['email']?></h5></div>
+            </div>
             <hr>
-            <p >Я начинающий кулинар.</p>
-            <hr>
+            <div class="my-div p-2 pl-3 text-left">
+                <label for="login">Описание:</label>
+                <div><h5 class="blog-post-title"><?php echo $person['description']?></h5></div>
+            </div>
+            <hr class="my-3">
         </div>
     </div>
 

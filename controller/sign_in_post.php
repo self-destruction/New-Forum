@@ -9,7 +9,7 @@ $password = $_POST["password"];
 
 try {
     $db = new dbConnect();
-    $db->selectUser($email, $password);
+    $login = $db->selectLogin($email, $password);
 } catch (PDOException $exception) {
     echo json_encode(['isSuccess' => false, 'errorCode' => 1]);
     return;
@@ -18,5 +18,5 @@ try {
     return;
 }
 
-$_SESSION['email'] = $email;
+$_SESSION['login'] = $login;
 echo json_encode(['isSuccess' => true, 'errorCode' => null]);

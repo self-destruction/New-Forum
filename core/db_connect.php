@@ -49,22 +49,45 @@ class dbConnect {
     /**
      * @param $email
      * @param $password
+     * @return string
      * @throws Exception
      */
-    function selectUser($email, $password) {
+    function selectLogin($email, $password) {
         $hash = $this->getHash($password);
 
         $result = $this->pdo->prepare(
-            "SELECT id FROM `forum`.`user` WHERE email = :email AND hash = :hash"
+            "SELECT login FROM `forum`.`user` WHERE email = :email AND hash = :hash"
         );
         $result->bindParam(":email", $email, PDO::PARAM_STR);
         $result->bindParam(":hash", $hash, PDO::PARAM_STR);
         $result->execute();
         $user = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        if (empty($user) || !isset($user[0]['id'])) {
+        if (empty($user) || !isset($user[0]['login'])) {
             throw new Exception('Пользователь не найден', 2);
         }
+
+        return $user[0]['login'];
+    }
+
+    /**
+     * @param $login
+     * @return array
+     * @throws Exception
+     */
+    function getPersonByLogin($login) {
+        $result = $this->pdo->prepare(
+            "SELECT login, email, description, createdAt FROM `forum`.`user` WHERE login = :login"
+        );
+        $result->bindParam(":login", $login, PDO::PARAM_STR);
+        $result->execute();
+        $person = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($person) || !isset($person[0]['login'])) {
+            throw new Exception('Пользователь не найден');
+        }
+
+        return $person[0];
     }
 
     /**
