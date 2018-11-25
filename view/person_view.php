@@ -14,7 +14,7 @@ session_start();
 
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/index.css" rel="stylesheet">
-    <link href="../personPage/person.css" rel="stylesheet">
+    <link href="../css/person.css" rel="stylesheet">
 
     <script src="../js/main.js"></script>
 </head>

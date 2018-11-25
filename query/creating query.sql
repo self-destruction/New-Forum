@@ -2,6 +2,7 @@
 DROP USER `admin`@`localhost`;
 DROP USER `forum_user`@`localhost`;
 
+DROP DATABASE IF EXISTS `forum`;
 CREATE DATABASE IF NOT EXISTS `forum`;
 USE `forum`;
 

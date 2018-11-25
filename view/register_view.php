@@ -10,7 +10,7 @@
     <title>Вход в учётную запись</title>
 
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../register/register.css" rel="stylesheet">
+    <link href="../css/register.css" rel="stylesheet">
 
     <script src="../js/main.js"></script>
 </head>
@@ -55,6 +55,6 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../register/register.js"></script>
+<script type="text/javascript" src="../js/register.js"></script>
 </body>
 </html>

@@ -8,15 +8,22 @@ function signinError(errorMessage) {
 }
 
 $("#submit")[0].onclick = function() {
+    let login = document.getElementById("login").value,
+        email = document.getElementById("email").value,
+        password = document.getElementById("password").value;
+
+    console.log({'login': login, 'email': email, 'password': password});
+
     $.ajax({
         type: 'POST',
         url: 'register_post',
         data: {
-            'login': document.getElementById("login").value,
-            'email': document.getElementById("email").value,
-            'password': document.getElementById("password").value
+            'login': login,
+            'email': email,
+            'password': password
         },
         success: function (response) {
+            console.log(response);
             let responseJSON = JSON.parse(response);
 
             let errorText = '';
