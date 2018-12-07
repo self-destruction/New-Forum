@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../static/favicon.ico">
 
-    <title>Вход в учётную запись</title>
+    <title>Регистрация учётной записи</title>
 
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/register.css" rel="stylesheet">

@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `theme`;
 CREATE TABLE IF NOT EXISTS `theme` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `userId` INT(11) UNSIGNED NOT NULL,
-  `title` VARCHAR(200) NOT NULL,
+  `title` VARCHAR(200) UNIQUE NOT NULL,
   `description` TEXT DEFAULT NULL,
   `tags` TEXT DEFAULT NULL,
   `status` ENUM('opened', 'closed', 'blocked') NOT NULL DEFAULT 'opened',

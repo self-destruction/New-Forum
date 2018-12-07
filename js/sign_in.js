@@ -22,7 +22,7 @@ $("#submit")[0].onclick = function() {
             let errorText = '';
             if(!responseJSON.isSuccess) {
                 switch (responseJSON.errorCode) {
-                    case 1: errorText = 'Невозможно установить соединение с базой данных'; break;
+                    case 1: errorText = 'Невозможно установить соединение с базой данных.'; break;
                     case 2: errorText = 'Email или пароль введён неверно.'; break;
                     default: errorText = 'Ошибка.'; break;
                 }

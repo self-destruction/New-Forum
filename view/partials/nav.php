@@ -11,6 +11,9 @@
     } else {
         ?>
         <div>
+            <a id="btnCreateTheme" class="btn my-2 my-sm-0 btn-primary btn-block" href="/create_theme" role="button">+ Создать тему</a>
+        </div>
+        <div class="mx-sm-1">
             <a id="personPage" class="btn btn-outline-light my-2 my-sm-0 btn-light btn-block" href="/person<?php echo "?login={$_SESSION['login']}"; ?>" role="button">Мой аккаунт</a>
         </div>
         <form method="post" action="../core/session_destroy.php">

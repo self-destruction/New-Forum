@@ -25,9 +25,9 @@ class dbConnect {
     }
 
     /**
-     * @param $login
-     * @param $email
-     * @param $password
+     * @param $login string
+     * @param $email string
+     * @param $password string
      * @throws Exception
      */
     public function insertUser($login, $email, $password) {
@@ -47,8 +47,27 @@ class dbConnect {
     }
 
     /**
-     * @param $email
-     * @param $password
+     * @param $theme_title string
+     * @param $person array
+     * @throws Exception
+     */
+    public function insertThemeByPerson($theme_title, $person) {
+        try {
+            $result = $this->pdo->prepare(
+                "INSERT INTO `forum`.`theme` (userId, title)
+              VALUES (:userId, :title)"
+            );
+            $result->bindParam(":userId", $person['id'], PDO::PARAM_INT);
+            $result->bindParam(":title", $theme_title, PDO::PARAM_STR);
+            $result->execute();
+        } catch (PDOException $exception) {
+            throw new Exception('Не удалось выполнить добавление темы', 2);
+        }
+    }
+
+    /**
+     * @param $email string
+     * @param $password string
      * @return string
      * @throws Exception
      */
@@ -71,13 +90,13 @@ class dbConnect {
     }
 
     /**
-     * @param $login
+     * @param $login string
      * @return array
      * @throws Exception
      */
     function getPersonByLogin($login) {
         $result = $this->pdo->prepare(
-            "SELECT login, email, description, createdAt FROM `forum`.`user` WHERE login = :login"
+            "SELECT id, login, email, description, createdAt FROM `forum`.`user` WHERE login = :login"
         );
         $result->bindParam(":login", $login, PDO::PARAM_STR);
         $result->execute();
@@ -91,7 +110,7 @@ class dbConnect {
     }
 
     /**
-     * @param $password
+     * @param $password string
      * @return bool|string
      */
     function getHash($password) {
