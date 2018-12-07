@@ -1,4 +1,5 @@
 <?php
+require 'core/get_all_themes_info.php';
 session_start();
 ?>
 <!doctype html>
@@ -42,50 +43,27 @@ session_start();
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <!--<th scope="row">1</th>-->
-                    <td>Как приготовить пироженку</td>
-                    <td class="text-center">Emerald</td>
-                    <td class="text-center">26</td>
-                    <td class="text-center">11 587</td>
-                    <td class="text-center">
-                        <div class="gray"><small>Вс, 19 авг 2018 20:31</small></div>
-                        от <a href="">xclubasex Wap</a>
-                    </td>
-                </tr>
-                <tr>
-                    <!--<th scope="row">2</th>-->
-                    <td>Как украсить стол на Пасху</td>
-                    <td class="text-center">Krutoy chuvak</td>
-                    <td class="text-center">23</td>
-                    <td class="text-center">453</td>
-                    <td class="text-center">
-                        <div class="gray"><small>Пн, 27 фев 2017 23:12</small></div>
-                        от <a href="">Emerald</a>
-                    </td>
-                </tr>
-                <tr>
-                    <!--<th scope="row">3</th>-->
-                    <td>Бекон с мороженкой VS Пицца с ананасами</td>
-                    <td class="text-center">Krutoy chuvak</td>
-                    <td class="text-center">0</td>
-                    <td class="text-center">12</td>
-                    <td class="text-center">
-                        <div class="gray"><small>Чт, 27 фев 2014 01:20</small></div>
-                        от <a href="">mia</a>
-                    </td>
-                </tr>
-                <tr>
-                    <!--<th scope="row">4</th>-->
-                    <td>Бекон с мороженкой VS Пицца с ананасами VS Говяжий доширак VS Мадагаскарские тараканы VS Инвайт просто добавь воды</td>
-                    <td class="text-center">Izumrud</td>
-                    <td class="text-center">0</td>
-                    <td class="text-center">12</td>
-                    <td class="text-center">
-                        <div class="gray"><small>Чт, 27 фев 2014 01:20</small></div>
-                        от <a href="">mia</a>
-                    </td>
-                </tr>
+                <?php
+                if ($themes) {
+                    foreach ($themes as $theme) {
+                        ?>
+                        <tr>
+                            <!--<th scope="row">1</th>-->
+                            <td><?php echo $theme['title'] ?></td>
+                            <td class="text-center"><a href="/person<?php echo "?login={$theme['login']}"; ?>"><?php echo $theme['login'] ?></a></td>
+                            <td class="text-center">26</td>
+                            <td class="text-center">11 587</td>
+                            <td class="text-center">
+                                <div class="gray"><small>Вс, 19 авг 2018 20:31</small></div>
+                                от <a href="">xclubasex Wap</a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                } else {
+                    var_dump($exception);
+                }
+                ?>
                 </tbody>
             </table>
         </div>

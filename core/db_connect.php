@@ -71,7 +71,7 @@ class dbConnect {
      * @return string
      * @throws Exception
      */
-    function selectLogin($email, $password) {
+    public function selectLogin($email, $password) {
         $hash = $this->getHash($password);
 
         $result = $this->pdo->prepare(
@@ -94,7 +94,7 @@ class dbConnect {
      * @return array
      * @throws Exception
      */
-    function getPersonByLogin($login) {
+    public function getPersonByLogin($login) {
         $result = $this->pdo->prepare(
             "SELECT id, login, email, description, createdAt FROM `forum`.`user` WHERE login = :login"
         );
@@ -107,6 +107,26 @@ class dbConnect {
         }
 
         return $person[0];
+    }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function getAllThemes() {
+        $result = $this->pdo->prepare(
+            "SELECT u.login, t.title, t.createdAt FROM `forum`.`theme` t
+                INNER JOIN `forum`.`user` u ON t.userId = u.id
+                WHERE t.status = 'opened'"
+        );
+        $result->execute();
+        $themes = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($themes) || !isset($themes[0]['login'])) {
+            throw new Exception('Пользователь не найден');
+        }
+
+        return $themes;
     }
 
     /**
