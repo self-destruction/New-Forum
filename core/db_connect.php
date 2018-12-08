@@ -48,17 +48,19 @@ class dbConnect {
 
     /**
      * @param $theme_title string
+     * @param $theme_description string
      * @param $person array
      * @throws Exception
      */
-    public function insertThemeByPerson($theme_title, $person) {
+    public function insertThemeByPerson($theme_title, $theme_description, $person) {
         try {
             $result = $this->pdo->prepare(
-                "INSERT INTO `forum`.`theme` (userId, title)
-              VALUES (:userId, :title)"
+                "INSERT INTO `forum`.`theme` (userId, title, description)
+              VALUES (:userId, :title, :description)"
             );
             $result->bindParam(":userId", $person['id'], PDO::PARAM_INT);
             $result->bindParam(":title", $theme_title, PDO::PARAM_STR);
+            $result->bindParam(":description", $theme_description, PDO::PARAM_STR);
             $result->execute();
         } catch (PDOException $exception) {
             throw new Exception('Не удалось выполнить добавление темы', 2);
@@ -115,7 +117,7 @@ class dbConnect {
      */
     public function getAllThemes() {
         $result = $this->pdo->prepare(
-            "SELECT u.login, t.title, t.createdAt FROM `forum`.`theme` t
+            "SELECT u.login, t.id, t.title, t.createdAt FROM `forum`.`theme` t
                 INNER JOIN `forum`.`user` u ON t.userId = u.id
                 WHERE t.status = 'opened'"
         );
@@ -127,6 +129,28 @@ class dbConnect {
         }
 
         return $themes;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws Exception
+     */
+    public function getThemeById($id) {
+        $result = $this->pdo->prepare(
+            "SELECT t.id, userId, u.login, title, t.description, t.createdAt FROM `forum`.`theme` t
+              INNER JOIN `forum`.`user` u ON t.userId = u.id
+            WHERE t.id = :id"
+        );
+        $result->bindParam(":id", $id, PDO::PARAM_INT);
+        $result->execute();
+        $theme = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($theme) || !isset($theme[0]['id'])) {
+            throw new Exception('Тема не найден');
+        }
+
+        return $theme[0];
     }
 
     /**

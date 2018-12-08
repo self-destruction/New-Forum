@@ -11,4 +11,5 @@ $router->define([
     'person'            => 'controller/person.php',
     'create_theme'      => 'controller/create_theme.php',
     'create_theme_post' => 'controller/create_theme_post.php',
+    'theme'             => 'controller/theme.php',
 ]);

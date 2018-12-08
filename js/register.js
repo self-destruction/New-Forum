@@ -48,3 +48,21 @@ function validatePassword(){
         document.getElementById("confirm").setCustomValidity('');
     }
 }
+
+$("#login").change(function() {
+    let login = document.getElementById("login").value;
+
+    console.log({'login': login});
+});
+
+$("#email").change(function() {
+    let email = document.getElementById("email").value;
+
+    console.log({'email': email});
+});
+
+$("#password").change(function() {
+    let password = document.getElementById("password").value;
+
+    console.log({'password': password});
+});

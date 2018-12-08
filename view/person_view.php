@@ -53,5 +53,6 @@ if (!$person) {
 </div>
 
 <?php require 'partials/footer.php'?>
+<script>console.log(<?php echo json_encode($person); ?>);</script>
 </body>
 </html>

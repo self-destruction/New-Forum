@@ -1,6 +1,6 @@
 <?php
-require 'core/get_all_themes_info.php';
 session_start();
+require 'core/get_all_themes_info.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -47,21 +47,19 @@ session_start();
                 if ($themes) {
                     foreach ($themes as $theme) {
                         ?>
-                        <tr>
-                            <!--<th scope="row">1</th>-->
-                            <td><?php echo $theme['title'] ?></td>
-                            <td class="text-center"><a href="/person<?php echo "?login={$theme['login']}"; ?>"><?php echo $theme['login'] ?></a></td>
-                            <td class="text-center">26</td>
-                            <td class="text-center">11 587</td>
-                            <td class="text-center">
-                                <div class="gray"><small>Вс, 19 авг 2018 20:31</small></div>
-                                от <a href="">xclubasex Wap</a>
-                            </td>
-                        </tr>
+                            <tr onclick="document.location='<?php echo "/theme?id={$theme['id']}"; ?>'" class="trClickable">
+                                <!--<th scope="row">1</th>-->
+                                <td><?php echo $theme['title'] ?></td>
+                                <td class="text-center"><?php echo $theme['login'] ?></td>
+                                <td class="text-center">26</td>
+                                <td class="text-center">11 587</td>
+                                <td class="text-center">
+                                    <div class="gray"><small>Вс, 19 авг 2018 20:31</small></div>
+                                    от xclubasex Wap
+                                </td>
+                            </tr>
                         <?php
                     }
-                } else {
-                    var_dump($exception);
                 }
                 ?>
                 </tbody>
@@ -72,5 +70,7 @@ session_start();
 </div>
 
 <?php require 'partials/footer.php'?>
+<script>console.log(<?php echo json_encode($themes); ?>);</script>
+<script>console.log(<?php echo json_encode($exception); ?>);</script>
 </body>
 </html>
