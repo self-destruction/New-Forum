@@ -51,15 +51,15 @@ if (!$theme) {
         <?php
         foreach ($messages as $message) { ?>
           <tr class="d-flex">
-            <th class="col">
+            <td class="col">
               <a href="/person<?php echo "?login={$message['user']['login']}"; ?>"><?php echo $message['user']['login']?></a><br>
               <small><?php echo getBeautifulDate($message['createdAt']);?></small>
-            </th>
-            <th class="col-10">
+            </td>
+            <td class="text-justify col-10">
               <div class="align-top text-left">
                 <?php echo $message['text'];?>
               </div>
-            </th>
+            </td>
           </tr>
         <?php
         }
