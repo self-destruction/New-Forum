@@ -12,4 +12,5 @@ $router->define([
     'create_theme'      => 'controller/create_theme.php',
     'create_theme_post' => 'controller/create_theme_post.php',
     'theme'             => 'controller/theme.php',
+    'message_post'      => 'controller/message_post.php',
 ]);

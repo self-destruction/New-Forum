@@ -48,16 +48,31 @@ if (!$theme) {
         </tr>
         </thead>
         <tbody>
-
+        <?php
+        foreach ($messages as $message) { ?>
+          <tr class="d-flex">
+            <th class="col">
+              <a href="/person<?php echo "?login={$message['user']['login']}"; ?>"><?php echo $message['user']['login']?></a><br>
+              <small><?php echo getBeautifulDate($message['createdAt']);?></small>
+            </th>
+            <th class="col-10">
+              <div class="align-top text-left">
+                <?php echo $message['text'];?>
+              </div>
+            </th>
+          </tr>
+        <?php
+        }
+        ?>
 
         </tbody>
       </table>
-      <div class="">
+      <div class="mx-2">
         <div class="mb-3">
-          <label for="exampleFormControlTextarea1">Текст вашего сообщения</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Введите текст"></textarea>
+          <label for="messageArea">Текст вашего сообщения</label>
+          <textarea class="form-control" id="messageArea" rows="3" placeholder="Введите текст"></textarea>
           <div class="mt-1 text-right">
-            <button type="submit" class="btn btn-success">Отправить</button>
+            <button id="submit" type="submit" class="btn btn-success">Отправить</button>
           </div>
         </div>
       </div>
@@ -69,6 +84,6 @@ if (!$theme) {
 <script>console.log(<?php echo json_encode($theme); ?>);</script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../dist/js/bootstrap.min.js"></script>
-<script src="../js/main.js"></script>
+<script type="text/javascript" src="../js/message_submit.js"></script>
 </body>
 </html>

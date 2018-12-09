@@ -10,6 +10,7 @@ if (isset($output['id']) && $output['id'] !== '') {
     try {
         $db = new dbConnect();
         $theme = $db->getThemeById($output['id']);
+        $messages = $db->getMessagesByThemeId($output['id']);
     } catch (Exception $exception) {
 
     }
