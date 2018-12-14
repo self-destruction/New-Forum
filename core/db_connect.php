@@ -154,8 +154,10 @@ class dbConnect {
      */
     public function getAllThemes() {
         $result = $this->pdo->prepare(
-            "SELECT u.login, t.id, t.title, t.createdAt FROM `forum`.`theme` t
-                INNER JOIN `forum`.`user` u ON t.userId = u.id
+            "SELECT u.login, t.id, t.title, t.createdAt, t.views,
+                  (SELECT COUNT(id) + 1 FROM `forum`.`message` m WHERE m.themeId = t.id) AS `answers` 
+                FROM `forum`.`theme` t
+                  INNER JOIN `forum`.`user` u ON t.userId = u.id
                 WHERE t.status = 'opened'"
         );
         $result->execute();

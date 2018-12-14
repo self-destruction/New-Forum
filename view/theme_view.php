@@ -36,26 +36,26 @@ if (!$theme) {
       <table class="tableTheme table table"> <!-- table-sm table-striped -->
         <thead>
         <tr class="d-flex">
-          <th class="col">
+          <td class="col-3 text-center">
             <a href="/person<?php echo "?login={$theme['login']}"; ?>"><?php echo $theme['login']?></a><br>
               <small><?php echo getBeautifulDate($theme['createdAt']);?></small>
-          </th>
-          <th class="col-10">
-            <div class="align-top text-left">
+          </td>
+          <td class="col">
+            <div class="align-text-top text-left">
               <?php echo $theme['description'];?>
             </div>
-          </th>
+          </td>
         </tr>
         </thead>
         <tbody>
         <?php
         foreach ($messages as $message) { ?>
           <tr class="d-flex">
-            <td class="col">
+            <td class="col-3 text-center">
               <a href="/person<?php echo "?login={$message['user']['login']}"; ?>"><?php echo $message['user']['login']?></a><br>
               <small><?php echo getBeautifulDate($message['createdAt']);?></small>
             </td>
-            <td class="text-justify col-10">
+            <td class="col">
               <div class="align-top text-left">
                 <?php echo $message['text'];?>
               </div>

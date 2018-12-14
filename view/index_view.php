@@ -33,13 +33,13 @@ require 'core/get_all_themes_info.php';
         <div class="table-responsive">
             <table class="table table-hover"> <!-- table-sm table-striped -->
                 <thead>
-                <tr>
+                <tr class="d-flex">
                     <!--<th scope="col">#</th>-->
-                    <th scope="col">Название темы</th>
-                    <th scope="col" class="text-center">Автор темы</th>
-                    <th scope="col" class="text-center">Ответы</th>
-                    <th scope="col" class="text-center">Просмотры</th>
-                    <th scope="col" class="text-center">Последнее сообщение</th>
+                    <th class="col">Название темы</th>
+                    <th class="col text-center">Автор темы</th>
+                    <th class="col-1 text-center">Ответы</th>
+                    <th class="col-1 text-center">Просмотры</th>
+                    <th class="col-3 text-center">Последнее сообщение</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,13 +47,13 @@ require 'core/get_all_themes_info.php';
                 if ($themes) {
                     foreach ($themes as $theme) {
                         ?>
-                            <tr onclick="document.location='<?php echo "/theme?id={$theme['id']}"; ?>'" class="trClickable">
+                            <tr onclick="document.location='<?php echo "/theme?id={$theme['id']}"; ?>'" class="trClickable d-flex">
                                 <!--<th scope="row">1</th>-->
-                                <td><?php echo $theme['title'] ?></td>
-                                <td class="text-center"><?php echo $theme['login'] ?></td>
-                                <td class="text-center">26</td>
-                                <td class="text-center">11 587</td>
-                                <td class="text-center">
+                                <td class="col"><?php echo $theme['title'] ?></td>
+                                <td class="col text-center"><?php echo $theme['login'] ?></td>
+                                <td class="col-1 text-center"><?php echo $theme['answers'] ?></td>
+                                <td class="col-1 text-center"><?php echo $theme['views'] ?></td>
+                                <td class="col-3 text-center">
                                     <div class="gray"><small>Вс, 19 авг 2018 20:31</small></div>
                                     от xclubasex Wap
                                 </td>

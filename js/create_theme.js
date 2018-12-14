@@ -1,4 +1,7 @@
 function creatingThemeMessage(isSuccess, messageText) {
+    document.getElementById("theme_title").value = "";
+    document.getElementById("theme_description").value = "";
+
     let messageTextDiv;
     if (isSuccess) {
         messageTextDiv = "<div id='messageText' class='alert alert-success' role='alert'>"+messageText+"</div>";

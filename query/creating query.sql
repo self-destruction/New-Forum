@@ -68,3 +68,5 @@ GRANT UPDATE ON `forum`.`user` to `forum_user`@`localhost`;
 
 # SELECT User,Host FROM mysql.user;
 # SHOW GRANTS FOR `forum_user`@`localhost`;
+
+ALTER TABLE `forum`.`theme` ADD `views` INTEGER UNSIGNED DEFAULT 0 NOT NULL;
