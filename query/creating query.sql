@@ -59,14 +59,15 @@ CREATE TABLE IF NOT EXISTS `picture` (
   FOREIGN KEY (`messageId`) REFERENCES `forum`.`message`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `forum`.`theme` ADD `views` INTEGER UNSIGNED DEFAULT 0 NOT NULL AFTER `tags`;
+
 CREATE USER `admin`@`localhost` IDENTIFIED BY 'admin';
 GRANT SELECT,INSERT,UPDATE,DELETE ON `forum`.* to `admin`@`localhost`;
 
 CREATE USER `forum_user`@`localhost` IDENTIFIED BY 'forum_user';
-GRANT SELECT, INSERT ON `forum`.* to `forum_user`@`localhost`;
-GRANT UPDATE ON `forum`.`user` to `forum_user`@`localhost`;
+GRANT SELECT, INSERT ON `forum`.* TO `forum_user`@`localhost`;
+GRANT UPDATE (login, email, hash, description) ON `forum`.`user` TO `forum_user`@`localhost`;
+GRANT UPDATE (views) ON `forum`.`theme` TO `forum_user`@`localhost`;
 
 # SELECT User,Host FROM mysql.user;
 # SHOW GRANTS FOR `forum_user`@`localhost`;
-
-ALTER TABLE `forum`.`theme` ADD `views` INTEGER UNSIGNED DEFAULT 0 NOT NULL AFTER `tags`;

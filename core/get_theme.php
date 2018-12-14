@@ -13,6 +13,6 @@ if (isset($output['id']) && $output['id'] !== '') {
         $db->incrementThemeViewsById($theme['id']);
         $messages = $db->getMessagesByThemeId($output['id']);
     } catch (Exception $exception) {
-
+        var_dump($exception);
     }
 }

@@ -12,7 +12,7 @@ class dbConnect {
     private $pdo;
 
     /**
-     * db_connect constructor.
+     * dbConnect constructor.
      */
     public function __construct()
     {
@@ -22,6 +22,11 @@ class dbConnect {
             'forum_user',
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
+    }
+
+    public function __destruct()
+    {
+
     }
 
     /**
@@ -97,10 +102,9 @@ class dbConnect {
     public function incrementThemeViewsById($theme_id) {
         $stmt = $this->pdo->prepare(
             "UPDATE `forum`.`theme` SET views = views + 1
-              WHERE id = :theme_id"
+              WHERE id = :id"
         );
-//        $stmt->bindParam(":theme_id", $theme_id, PDO::PARAM_INT);
-        $stmt->execute(['theme_id' => $theme_id]);
+        $stmt->execute(['id' => $theme_id]);
     }
 
     /**
