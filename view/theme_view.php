@@ -49,19 +49,21 @@ if (!$theme) {
         </thead>
         <tbody>
         <?php
-        foreach ($messages as $message) { ?>
-          <tr class="d-flex">
-            <td class="col-3 text-center">
-              <a href="/person<?php echo "?login={$message['user']['login']}"; ?>"><?php echo $message['user']['login']?></a><br>
-              <small><?php echo getBeautifulDate($message['createdAt']);?></small>
-            </td>
-            <td class="col">
-              <div class="align-top text-left">
-                <?php echo $message['text'];?>
-              </div>
-            </td>
-          </tr>
-        <?php
+        if ($messages) {
+          foreach ($messages as $message) { ?>
+            <tr class="d-flex">
+              <td class="col-3 text-center">
+                <a href="/person<?php echo "?login={$message['user']['login']}"; ?>"><?php echo $message['user']['login'] ?></a><br>
+                  <small><?php echo getBeautifulDate($message['createdAt']); ?></small>
+                </td>
+                <td class="col">
+                  <div class="align-top text-left">
+                    <?php echo $message['text']; ?>
+                  </div>
+              </td>
+            </tr>
+            <?php
+          }
         }
         ?>
 

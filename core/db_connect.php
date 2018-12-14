@@ -33,14 +33,14 @@ class dbConnect {
     public function insertUser($login, $email, $password) {
         try {
             $hash = $this->getHash($password);
-            $result = $this->pdo->prepare(
+            $stmt = $this->pdo->prepare(
                 "INSERT INTO `forum`.`user` (login, email, hash)
               VALUES (:login, :email, :hash)"
             );
-            $result->bindParam(":login", $login, PDO::PARAM_STR);
-            $result->bindParam(":email", $email, PDO::PARAM_STR);
-            $result->bindParam(":hash", $hash, PDO::PARAM_STR);
-            $result->execute();
+            $stmt->bindParam(":login", $login, PDO::PARAM_STR);
+            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+            $stmt->bindParam(":hash", $hash, PDO::PARAM_STR);
+            $stmt->execute();
         } catch (PDOException $exception) {
             throw new Exception('Не удалось выполнить добавление такого пользователя', 2);
         }
@@ -54,34 +54,53 @@ class dbConnect {
      */
     public function insertThemeByPerson($theme_title, $theme_description, $person) {
         try {
-            $result = $this->pdo->prepare(
+            $stmt = $this->pdo->prepare(
                 "INSERT INTO `forum`.`theme` (userId, title, description)
               VALUES (:userId, :title, :description)"
             );
-            $result->bindParam(":userId", $person['id'], PDO::PARAM_INT);
-            $result->bindParam(":title", $theme_title, PDO::PARAM_STR);
-            $result->bindParam(":description", $theme_description, PDO::PARAM_STR);
-            $result->execute();
+            $stmt->bindParam(":userId", $person['id'], PDO::PARAM_INT);
+            $stmt->bindParam(":title", $theme_title, PDO::PARAM_STR);
+            $stmt->bindParam(":description", $theme_description, PDO::PARAM_STR);
+            $stmt->execute();
         } catch (PDOException $exception) {
             throw new Exception('Не удалось выполнить добавление темы', 2);
         }
     }
 
+    /**
+     * @param $message
+     * @param $theme_id
+     * @param $person
+     * @return array
+     * @throws Exception
+     */
     public function insertMessageByPerson($message, $theme_id, $person) {
         try {
-            $result = $this->pdo->prepare(
+            $stmt = $this->pdo->prepare(
                 "INSERT INTO `forum`.`message` (userId, themeId, text)
               VALUES (:userId, :themeId, :text)"
             );
-            $result->bindParam(":userId", $person['id'], PDO::PARAM_INT);
-            $result->bindParam(":themeId", $theme_id, PDO::PARAM_STR);
-            $result->bindParam(":text", $message, PDO::PARAM_STR);
-            $result->execute();
+            $stmt->bindParam(":userId", $person['id'], PDO::PARAM_INT);
+            $stmt->bindParam(":themeId", $theme_id, PDO::PARAM_STR);
+            $stmt->bindParam(":text", $message, PDO::PARAM_STR);
+            $stmt->execute();
 
             return $this->getMessageById($this->pdo->lastInsertId());
         } catch (PDOException $exception) {
             throw new Exception('Не удалось выполнить добавление сообщения', 2);
         }
+    }
+
+    /**
+     * @param $theme_id
+     */
+    public function incrementThemeViewsById($theme_id) {
+        $stmt = $this->pdo->prepare(
+            "UPDATE `forum`.`theme` SET views = views + 1
+              WHERE id = :theme_id"
+        );
+//        $stmt->bindParam(":theme_id", $theme_id, PDO::PARAM_INT);
+        $stmt->execute(['theme_id' => $theme_id]);
     }
 
     /**
@@ -93,13 +112,13 @@ class dbConnect {
     public function selectLogin($email, $password) {
         $hash = $this->getHash($password);
 
-        $result = $this->pdo->prepare(
+        $stmt = $this->pdo->prepare(
             "SELECT login FROM `forum`.`user` WHERE email = :email AND hash = :hash"
         );
-        $result->bindParam(":email", $email, PDO::PARAM_STR);
-        $result->bindParam(":hash", $hash, PDO::PARAM_STR);
-        $result->execute();
-        $user = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt->bindParam(":hash", $hash, PDO::PARAM_STR);
+        $stmt->execute();
+        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($user) || !isset($user[0]['login'])) {
             throw new Exception('Пользователь не найден', 2);
@@ -114,12 +133,12 @@ class dbConnect {
      * @throws Exception
      */
     public function getPersonByLogin($login) {
-        $result = $this->pdo->prepare(
+        $stmt = $this->pdo->prepare(
             "SELECT id, login, email, description, createdAt FROM `forum`.`user` WHERE login = :login"
         );
-        $result->bindParam(":login", $login, PDO::PARAM_STR);
-        $result->execute();
-        $person = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(":login", $login, PDO::PARAM_STR);
+        $stmt->execute();
+        $person = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($person) || !isset($person[0]['login'])) {
             throw new Exception('Пользователь не найден');
@@ -134,12 +153,12 @@ class dbConnect {
      * @throws Exception
      */
     public function getPersonById($id) {
-        $result = $this->pdo->prepare(
+        $stmt = $this->pdo->prepare(
             "SELECT id, login, email, description, createdAt FROM `forum`.`user` WHERE id = :id"
         );
-        $result->bindParam(":id", $id, PDO::PARAM_INT);
-        $result->execute();
-        $person = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $person = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($person) || !isset($person[0]['login'])) {
             throw new Exception('Пользователь не найден');
@@ -153,15 +172,15 @@ class dbConnect {
      * @throws Exception
      */
     public function getAllThemes() {
-        $result = $this->pdo->prepare(
+        $stmt = $this->pdo->prepare(
             "SELECT u.login, t.id, t.title, t.createdAt, t.views,
                   (SELECT COUNT(id) + 1 FROM `forum`.`message` m WHERE m.themeId = t.id) AS `answers` 
                 FROM `forum`.`theme` t
                   INNER JOIN `forum`.`user` u ON t.userId = u.id
                 WHERE t.status = 'opened'"
         );
-        $result->execute();
-        $themes = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $themes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($themes) || !isset($themes[0]['login'])) {
             throw new Exception('Пользователь не найден');
@@ -176,14 +195,14 @@ class dbConnect {
      * @throws Exception
      */
     public function getThemeById($id) {
-        $result = $this->pdo->prepare(
+        $stmt = $this->pdo->prepare(
             "SELECT t.id, userId, u.login, title, t.description, t.createdAt FROM `forum`.`theme` t
               INNER JOIN `forum`.`user` u ON t.userId = u.id
             WHERE t.id = :id"
         );
-        $result->bindParam(":id", $id, PDO::PARAM_INT);
-        $result->execute();
-        $theme = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $theme = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($theme) || !isset($theme[0]['id'])) {
             throw new Exception('Тема не найден');
@@ -192,14 +211,19 @@ class dbConnect {
         return $theme[0];
     }
 
+    /**
+     * @param $id
+     * @return array
+     * @throws Exception
+     */
     public function getMessageById($id) {
-        $result = $this->pdo->prepare(
+        $stmt = $this->pdo->prepare(
             "SELECT id, userId, themeId, text, createdAt FROM `forum`.`message`
             WHERE id = :id"
         );
-        $result->bindParam(":id", $id, PDO::PARAM_INT);
-        $result->execute();
-        $msg = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $msg = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($msg) || !isset($msg[0]['id'])) {
             throw new Exception('Сообщение не найдено');
@@ -208,17 +232,24 @@ class dbConnect {
         return $msg[0];
     }
 
+    /**
+     * @param $themeId
+     * @return array
+     * @throws Exception
+     */
     public function getMessagesByThemeId($themeId) {
-        $result = $this->pdo->prepare(
+        $stmt = $this->pdo->prepare(
             "SELECT id, userId AS user, themeId, text, createdAt FROM `forum`.`message`
             WHERE themeId = :themeId"
         );
-        $result->bindParam(":themeId", $themeId, PDO::PARAM_INT);
-        $result->execute();
-        $messages = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(":themeId", $themeId, PDO::PARAM_INT);
+        $stmt->execute();
+        $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($messages as &$message) {
-            $message['user'] = $this->getPersonById($message['user']);
+        if ($messages) {
+            foreach ($messages as &$message) {
+                $message['user'] = $this->getPersonById($message['user']);
+            }
         }
 
         return $messages;
