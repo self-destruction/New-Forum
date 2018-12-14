@@ -28,14 +28,14 @@ session_start();
             <label for="theme_title">Название темы</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="theme_title" id="theme_title" placeholder="Название темы" required autofocus/>
+                <input type="text" class="form-control" name="theme_title" id="theme_title" placeholder="Название темы" required autofocus minlength="3" maxlength="100"/>
             </div>
         </div>
         <div class="form-group text-left">
             <label for="theme_description">Текст вашего сообщения</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                <textarea class="form-control" name="theme_description" id="theme_description" rows="3" placeholder="Введите текст" required autofocus></textarea>
+                <textarea class="form-control" name="theme_description" id="theme_description" rows="3" placeholder="Введите текст" required autofocus minlength="1" maxlength="1000"></textarea>
             </div>
         </div>
         <button class="mt-5 mb-3 btn btn-lg btn-success btn-block" id="submit" type="submit">Создать</button>

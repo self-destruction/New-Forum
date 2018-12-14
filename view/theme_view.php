@@ -72,7 +72,7 @@ if (!$theme) {
       <div class="mx-2">
         <div class="mb-3">
           <label for="messageArea">Текст вашего сообщения</label>
-          <textarea class="form-control" id="messageArea" rows="3" placeholder="Введите текст"></textarea>
+          <textarea class="form-control" id="messageArea" rows="3" placeholder="Введите текст" required autofocus minlength="1" maxlength="1000"></textarea>
           <div class="mt-1 text-right">
             <button id="submit" type="submit" class="btn btn-success">Отправить</button>
           </div>

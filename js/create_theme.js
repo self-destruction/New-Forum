@@ -1,7 +1,4 @@
 function creatingThemeMessage(isSuccess, messageText) {
-    document.getElementById("theme_title").value = "";
-    document.getElementById("theme_description").value = "";
-
     let messageTextDiv;
     if (isSuccess) {
         messageTextDiv = "<div id='messageText' class='alert alert-success' role='alert'>"+messageText+"</div>";
@@ -19,30 +16,48 @@ $("#submit")[0].onclick = function() {
     let theme_title = document.getElementById("theme_title").value,
         theme_description = document.getElementById("theme_description").value;
 
-    $.ajax({
-        type: 'POST',
-        url: 'create_theme_post',
-        data: {
-            'theme_title': theme_title,
-            'theme_description': theme_description
-        },
-        success: function (response) {
-            let responseJSON = JSON.parse(response),
-                isSuccess = responseJSON.isSuccess;
+    if (!isValidData(3, 100, theme_title)) {
+        creatingThemeMessage(false, 'Некорректное название темы');
+    } else {
+        if (!isValidData(1, 1000, theme_description)) {
+            creatingThemeMessage(false, 'Некорректный текст сообщения');
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: 'create_theme_post',
+                data: {
+                    'theme_title': theme_title,
+                    'theme_description': theme_description
+                },
+                success: function (response) {
+                    let responseJSON = JSON.parse(response),
+                        isSuccess = responseJSON.isSuccess;
 
-            let messageText = '';
-            if(!isSuccess) {
-                switch (responseJSON.errorCode) {
-                    case 1: messageText = 'Невозможно установить соединение с базой данных.'; break;
-                    case 2: messageText = 'Тема с таким названием уже существует.'; break;
-                    default: messageText = 'Ошибка.'; break;
+                    let messageText = '';
+                    if (!isSuccess) {
+                        switch (responseJSON.errorCode) {
+                            case 1:
+                                messageText = 'Невозможно установить соединение с базой данных';
+                                break;
+                            case 2:
+                                messageText = 'Тема с таким названием уже существует';
+                                break;
+                            default:
+                                messageText = 'Ошибка';
+                                break;
+                        }
+                    } else {
+                        messageText = 'Тема успешно создана';
+                    }
+
+                    document.getElementById("theme_title").value = "";
+                    document.getElementById("theme_description").value = "";
+
+                    creatingThemeMessage(isSuccess, messageText)
                 }
-            } else {
-                messageText = 'Тема успешно создана';
-            }
-            creatingThemeMessage(isSuccess, messageText)
+            });
         }
-    });
+    }
 };
 
 $("#theme_title").change(function() {

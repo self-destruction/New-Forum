@@ -35,11 +35,11 @@ require 'core/get_all_themes_info.php';
                 <thead>
                 <tr class="d-flex">
                     <!--<th scope="col">#</th>-->
-                    <th class="col">Название темы</th>
-                    <th class="col text-center">Автор темы</th>
-                    <th class="col-1 text-center">Ответы</th>
-                    <th class="col-1 text-center">Просмотры</th>
-                    <th class="col-3 text-center">Последнее сообщение</th>
+                    <th class="col-lg col-md col-sm">Название темы</th>
+                    <th class="col-lg col-md col-sm text-center">Автор темы</th>
+                    <th class="col-lg-1 col-md-1 col-sm text-center">Ответы</th>
+                    <th class="col-lg-1 col-md col-sm text-center">Просмотры</th>
+                    <th class="col-lg-3 col-md col-sm text-center">Последнее сообщение</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,11 +49,11 @@ require 'core/get_all_themes_info.php';
                         ?>
                             <tr onclick="document.location='<?php echo "/theme?id={$theme['id']}"; ?>'" class="trClickable d-flex">
                                 <!--<th scope="row">1</th>-->
-                                <td class="col"><?php echo $theme['title'] ?></td>
-                                <td class="col text-center"><?php echo $theme['login'] ?></td>
-                                <td class="col-1 text-center"><?php echo $theme['answers'] ?></td>
-                                <td class="col-1 text-center"><?php echo $theme['views'] ?></td>
-                                <td class="col-3 text-center">
+                                <td class="col-lg col-md col-sm"><?php echo $theme['title'] ?></td>
+                                <td class="col-lg col-md col-sm text-center"><?php echo $theme['login'] ?></td>
+                                <td class="col-lg-1 col-md-1 col-sm text-center"><?php echo $theme['answers'] ?></td>
+                                <td class="col-lg-1 col-md col-sm text-center"><?php echo $theme['views'] ?></td>
+                                <td class="col-lg-3 col-md col-sm text-center">
                                     <div class="gray"><small>Вс, 19 авг 2018 20:31</small></div>
                                     от xclubasex Wap
                                 </td>
@@ -70,7 +70,7 @@ require 'core/get_all_themes_info.php';
 </div>
 
 <?php require 'partials/footer.php'?>
-<script>console.log(<?php echo json_encode($themes); ?>);</script>
-<script>console.log(<?php echo json_encode($exception); ?>);</script>
+<script>console.log(<?php echo json_encode(['themes' => $themes]); ?>);</script>
+<script>console.log(<?php echo json_encode(['exception' => $exception]); ?>);</script>
 </body>
 </html>
