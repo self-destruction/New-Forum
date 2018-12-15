@@ -69,6 +69,9 @@ if (!$theme) {
 
         </tbody>
       </table>
+      <?php
+        if (isset($_SESSION['login'])) {
+        ?>
       <div class="mx-2">
         <div class="mb-3">
           <label for="messageArea">Текст вашего сообщения</label>
@@ -78,6 +81,9 @@ if (!$theme) {
           </div>
         </div>
       </div>
+      <?php
+        }
+      ?>
     </div>
   </div>
 

@@ -10,35 +10,53 @@ function signinError(errorMessage) {
 $("#submit")[0].onclick = function() {
     let login = document.getElementById("login").value,
         email = document.getElementById("email").value,
-        password = document.getElementById("password").value;
+        password = document.getElementById("password").value,
+        confirm = document.getElementById("confirm").value;
 
-    console.log({'login': login, 'email': email, 'password': password});
+    console.log({'login': login, 'email': email, 'password': password, 'confirm' : confirm});
 
-    $.ajax({
-        type: 'POST',
-        url: 'register_post',
-        data: {
-            'login': login,
-            'email': email,
-            'password': password
-        },
-        success: function (response) {
-            console.log(response);
-            let responseJSON = JSON.parse(response);
+    let isEmailValid = ($('#email').val().match(/.+?\@.+/g) || []).length === 1,
+        isPasswordValid = password === confirm;
 
-            let errorText = '';
-            if(!responseJSON.isSuccess) {
-                switch (responseJSON.errorCode) {
-                    case 1: errorText = 'Невозможно установить соединение с базой данных'; break;
-                    case 2: errorText = 'Такой email или логин уже занят'; break;
-                    default: errorText = 'Ошибка.'; break;
+    if (!isEmailValid) {
+        signinError('Некорректный email');
+    } else {
+        if (!isPasswordValid) {
+            signinError('Пароли не совпадают');
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: 'register_post',
+                data: {
+                    'login': login,
+                    'email': email,
+                    'password': password
+                },
+                success: function (response) {
+                    console.log(response);
+                    let responseJSON = JSON.parse(response);
+
+                    let errorText = '';
+                    if (!responseJSON.isSuccess) {
+                        switch (responseJSON.errorCode) {
+                            case 1:
+                                errorText = 'Невозможно установить соединение с базой данных';
+                                break;
+                            case 2:
+                                errorText = 'Такой email или логин уже занят';
+                                break;
+                            default:
+                                errorText = 'Ошибка';
+                                break;
+                        }
+                        signinError(errorText)
+                    } else {
+                        window.location.href = '/';
+                    }
                 }
-                signinError(errorText)
-            } else {
-                window.location.href = '/';
-            }
+            });
         }
-    });
+    }
 };
 
 function validatePassword(){
